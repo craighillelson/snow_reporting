@@ -6,8 +6,8 @@ import functions
 functions.populate_dct()
 
 # company field is empty
-print functions.RTN()
-print "company is empty".upper()
+print(functions.RTN())
+print("company is empty".upper())
 for k, v in functions.DESCRIPTIONS_DCT.items():
     if not v[0]:
-        print k, v[1]
+        print(k, v[1])
