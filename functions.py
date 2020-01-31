@@ -36,17 +36,17 @@ def format_percentage(a, b):
     return per_fmt
 
 
-def write_to_csv(name_of_file, dct):
+def write_to_csv(a, b, c):
     """ write dictionary to csv """
     import csv
 
     # define HEADERS
-    # HEADERS =
+    HEADERS = a
 
-    with open(name_of_file, 'w') as out_file:
+    with open(b, 'w') as out_file:
         out_csv = csv.writer(out_file)
         out_csv.writerow(HEADERS)
-        for k, v in dct.items():
+        for k, v in c.items():
             keys_values = (k, v)
             out_csv.writerow(keys_values)
 
