@@ -4,13 +4,12 @@
 
 import os
 
-RTN = lambda: "\n"
+RTN = lambda: '\n'
 
 entries = os.listdir()
 choices_lst = []
 options = []
 choices_dct = {}
-
 alphabet = [
     'a',
     'b',
