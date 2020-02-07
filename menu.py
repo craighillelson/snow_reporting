@@ -54,6 +54,9 @@ print(RTN())
 
 while True:
     try:
+        print('What is the name of the file you uploaded?')
+        file_name = input()
+        print(RTN())
         print('please make a selection')
         for letter, script in choices_dct.items():
             print(letter, script)
