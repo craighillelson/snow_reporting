@@ -59,7 +59,7 @@ while True:
             print(letter, script)
         usr_choice = input()
         if usr_choice not in options:
-            print('not one of the options')
+            print('not one of the options\n')
         else:
             break
     except ValueError:
