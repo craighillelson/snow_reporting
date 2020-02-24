@@ -21,7 +21,10 @@ def open_file(a):
     """ """
     exec(open(a).read())
 
-print('a - average resolution time in days')
+
+print(RTN())
+
+print('a - calculate average resolution time in days')
 print('b - % change in incidents created week over week')
 print('c - companies by number of incidents created')
 print('d - find incidents where account is empty')
@@ -29,6 +32,6 @@ print('e - mult short descriptions')
 print('f - search for term')
 
 while True:
-    usr_choice = input()
+    usr_choice = str(input())
     open_file(switch_case(options, usr_choice))
     break
