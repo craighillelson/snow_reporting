@@ -18,8 +18,8 @@ weekdays = [
 options = {
     'a': 'avg_res_time_days_dec.py',
     'b': 'deltas_weekly.py',
-    'c': 'deltas_spec_dates.py'
-    # 'c': 'companies_by_num_tasks_perc.py',
+    'c': 'deltas_spec_dates.py',
+    'd': 'companies_by_num_tasks_perc.py',
     # 'd': 'empty_account.py',
     # 'e': 'mult_short_desc.py',
     # 'f': 'search_for_term.py',
@@ -43,7 +43,7 @@ print('please make a selection from the options below or \'enter\' to quit')
 print('a - calculate average resolution time in days')
 print('b - % change in incidents created week over week')
 print('c - % change in incidents created between two dates')
-# print('d - companies by number of incidents created')
+print('d - companies by number of incidents created')
 # print('e - find incidents where account is empty')
 # print('f - mult short descriptions')
 # print('g - search for term')
