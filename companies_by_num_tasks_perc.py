@@ -42,6 +42,6 @@ with open('companies_by_num_tasks_perc.csv', 'w') as out_file:
         out_csv.writerow(keys_values)
 
 # update user
-print('"companies_by_num_tasks_perc.csv" exported successlly')
+print('"companies_by_num_tasks_perc.csv" exported successfully')
 
 print(functions.RTN())
