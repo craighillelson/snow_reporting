@@ -1,14 +1,29 @@
 """ __doc__ """
 
+from datetime import datetime
+from datetime import timedelta
+
 RTN = lambda: '\n'
+
+weekdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+]
 
 options = {
     'a': 'avg_res_time_days_dec.py',
-    'b': 'inc_cre_wk_ov_wk.py',
-    'c': 'companies_by_num_tasks_perc.py',
-    'd': 'empty_account.py',
-    'e': 'mult_short_desc.py',
-    'f': 'search_for_term.py',
+    'b': 'deltas_weekly.py',
+    'c': 'deltas_spec_dates.py'
+    # 'c': 'companies_by_num_tasks_perc.py',
+    # 'd': 'empty_account.py',
+    # 'e': 'mult_short_desc.py',
+    # 'f': 'search_for_term.py',
+    # 'g': 'next_fri.py',
 }
 
 def switch_case(a, b):
@@ -24,14 +39,20 @@ def open_file(a):
 
 print(RTN())
 
+print('please make a selection from the options below or \'enter\' to quit')
 print('a - calculate average resolution time in days')
 print('b - % change in incidents created week over week')
-print('c - companies by number of incidents created')
-print('d - find incidents where account is empty')
-print('e - mult short descriptions')
-print('f - search for term')
+print('c - % change in incidents created between two dates')
+# print('d - companies by number of incidents created')
+# print('e - find incidents where account is empty')
+# print('f - mult short descriptions')
+# print('g - search for term')
+
+usr_choice = str(input())
 
 while True:
-    usr_choice = str(input())
-    open_file(switch_case(options, usr_choice))
-    break
+    if usr_choice == '':
+        break
+    else:
+        open_file(switch_case(options, usr_choice))
+        break
