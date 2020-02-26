@@ -53,7 +53,6 @@ def write_to_csv(a, b, c):
 
 def count_words(a):
     """ count words """
-    # count words
     a = short_desc_str.split()
 
     for w in a:
