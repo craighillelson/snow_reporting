@@ -1,5 +1,7 @@
 """ __doc__ """
 
+import csv
+
 mins_hr = 60
 mins_day = 24 * 60
 
@@ -37,5 +39,16 @@ while True:
 print('client - resolve time (days)')
 for client, res_time in client_res_time.items():
     print(f'{client} {res_time} days')
+
+print(RTN())
+
+with open('res_time_days.csv', "w") as out_file:
+    out_csv = csv.writer(out_file)
+    out_csv.writerow(['co','res_time_days'])
+    for k, v in client_res_time.items():
+        keys_values = (k, v)
+        out_csv.writerow(keys_values)
+
+print('"res_time_days.csv" exported successfully')
 
 print(RTN())
