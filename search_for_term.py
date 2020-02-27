@@ -3,11 +3,7 @@
 # imports
 import csv
 import functions
-import list
 import re
-
-# for term in list.terms:
-#     print(term)
 
 print(functions.RTN())
 
@@ -23,15 +19,12 @@ functions.open_csv(companies, tasks)
 num_tasks = functions.total_tasks(companies)
 
 # prompt user
-# while True:
 print('Enter the term you\'d like to search for ') #+
          # '(Or enter nothing to stop.):')
 term = input()
 term_dct = term.lower() + '_dct'
 term_dct = {}
 term_csv = term.lower() + '.csv'
-# if term == '':
-#     break
 terms = terms + [term]
 
 print(functions.RTN())
