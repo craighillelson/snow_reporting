@@ -4,12 +4,15 @@ import codecs
 import csv
 import functions
 from collections import namedtuple
+from collections import defaultdict
 
 SHORT_DESC_DCT = {}
 INCS_COUNT = []
 INCS = []
+d = defaultdict(list)
 
 # import csv and populate a dictionary with its contents
+# review
 with codecs.open('raw_data.csv', 'r', encoding='utf-8', \
 errors='ignore') as csv_file:
     F_CSV = csv.reader(csv_file)
@@ -32,10 +35,6 @@ for i in sorted(set(INCS)):
     count = INCS.count(i)
     co_inc_count = co, inc, int(count)
     INCS_COUNT.append(co_inc_count)
-
-from collections import defaultdict
-
-d = defaultdict(list)
 
 for k, *v in INCS_COUNT:
     d[k].append(v)
