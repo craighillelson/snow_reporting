@@ -75,6 +75,26 @@ def filter_dct():
     return dct
 
 
+def finalize_dct():
+    """ """
+    finalized_dct = {}
+
+    for i, (k, v) in enumerate(filtered_dct.items(), 1):
+        check = any(item in v for item in all_short_descriptions_to_skip)
+        if check is True:
+            pass
+        else:
+            finalized_dct[k] = v
+
+    return finalized_dct
+
+
+def output_enum_dct():
+    """ """
+    for i, (k, v) in enumerate(finalized_dct.items(), 1):
+        print(i, k, v)
+
+
 short_descriptions_to_skip = open_csv()
 short_descriptions_to_add = prompt_user()
 all_short_descriptions_to_skip = concat_lists(short_descriptions_to_skip,
@@ -83,17 +103,15 @@ all_short_descriptions_to_skip = concat_lists(short_descriptions_to_skip,
 
 write_to_csv(all_short_descriptions_to_skip)
 filtered_dct = filter_dct()
-finalized_dct = {}
+finalized_dct = finalize_dct()
+output_enum_dct()
 
-for i, (k, v) in enumerate(filtered_dct.items(), 1):
-    check = any(item in v for item in all_short_descriptions_to_skip)
-    if check is True:
-        pass
-    else:
-        # print(i, k, v)
-        finalized_dct[k] = v
-
-for i, (k, v) in enumerate(finalized_dct.items(), 1):
-    print(i, k, v)
-
+print('\n')
+total_incs = len(filtered_dct)
+human_created_incs = len(finalized_dct)
+print(f'total incidents: {total_incs}')
+print(f'incidents created by humans: {human_created_incs}')
+perc_human_created = human_created_incs / total_incs * 100
+perc_human_created_fmt = '{0:.2f}'.format(perc_human_created)+'%'
+print(perc_human_created_fmt)
 print('\n')
