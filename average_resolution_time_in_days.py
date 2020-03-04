@@ -39,3 +39,5 @@ with open('clients_average_resolution_times_in_days.csv', 'w') as out_file:
         out_csv.writerow(keys_values)
 
 print('"clients_average_resolution_times_in_days.csv" exported successfully')
+
+print(functions.RTN())
