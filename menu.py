@@ -1,30 +1,15 @@
 """ __doc__ """
 
-from datetime import datetime
-from datetime import timedelta
-
 RTN = lambda: '\n'
 
-# weekdays = [
-#     'Monday',
-#     'Tuesday',
-#     'Wednesday',
-#     'Thursday',
-#     'Friday',
-#     'Saturday',
-#     'Sunday',
-# ]
-
 options = {
-    'a': 'avg_res_time_days_dec.py', # works off user input
-    'b': 'deltas_weekly.py', # works off incs_cre_wkly.csv
-    'c': 'deltas_spec_dates.py', # works off incs_cre_wkly.csv
-    'd': 'num_perc_incs_by_co.py', # works off raw_data.csv
-    'e': 'mult_short_desc.py',
-    # 'f': 'empty_account.py',
-    # 'g': 'mult_short_desc.py',
-    # 'h': 'search_for_term.py',
-    # 'i': 'next_fri.py',
+    'a': 'average_resolution_time_in_days.py',
+    'b': 'incidents_created_week_over_week.py',
+    'c': 'companies_by_number_of_tasks_and_percentage.py',
+    'd': 'empty_account.py',
+    'e': 'group_incidents_by_company_count_unique_short_descriptions.py',
+    'f': 'search_for_term.py',
+    'g': 'filter_out_incidents_not_created_by_humans.py'
 }
 
 def switch_case(a, b):
@@ -34,28 +19,19 @@ def switch_case(a, b):
 
 
 def open_file(a):
-    """ """
+    """ open a Python script """
     exec(open(a).read())
 
 
-print(RTN())
-
-print('please make a selection from the options below or \'enter\' to quit')
-print('a - calculate average resolution time in days')
+print('a - average resolution time in days')
 print('b - % change in incidents created week over week')
-print('c - % change in incidents created between two dates')
-print('d - companies by number and percentage of incidents created')
-print('e - occurances of short descriptions by account ytd')
-# print('f - find incidents where account is empty')
-# print('g - mult short descriptions')
-# print('h - search for term')
-# print('i - assemble report')
-
-usr_choice = str(input())
+print('c - companies by number of incidents created')
+print('d - find incidents where company is empty')
+print('e - group incidents by company count unique short descriptions')
+print('f - search for number of occurances of a term')
+print('g - filter out incidents not created by humans')
 
 while True:
-    if usr_choice == '':
-        break
-    else:
-        open_file(switch_case(options, usr_choice))
-        break
+    usr_choice = input()
+    open_file(switch_case(options, usr_choice))
+    break
