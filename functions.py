@@ -7,6 +7,7 @@ from collections import namedtuple
 RTN = lambda: '\n'
 
 def open_csv(a, b):
+    """ open csv and populate dictionary with its contents """
     with codecs.open('raw_data.csv', 'r', encoding='utf-8',
                 errors='ignore') as csv_file:
         F_CSV = csv.reader(csv_file)
@@ -17,6 +18,13 @@ def open_csv(a, b):
             if row.company != "":
                 a.append(row.company)
                 b[row.number] = row.company, row.short_description
+
+
+def format_days(a, b):
+    """ format days as floats to the second decimal """
+    b = '{0:.2f}'.format(a)
+
+    return b
 
 
 def print_headers():
@@ -31,6 +39,7 @@ def print_break():
 
 
 def format_percentage(a, b):
+    """ format floats as percentages """
     per = float(a / b) * 100
     per_fmt = '{0:.2f}'.format(per)+'%'
     return per_fmt
@@ -71,9 +80,3 @@ def count_words(a):
 def total_tasks(a):
     total_tasks = len(a)
     return total_tasks
-
-
-# def concat_terms_data_stores(a):
-#     term_dct = a.lower() + '_dct'
-#     term_dct = {}
-#     term_csv = a.lower() + '.csv'
