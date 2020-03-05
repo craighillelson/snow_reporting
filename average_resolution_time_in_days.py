@@ -20,14 +20,25 @@ with open('clients_resolution_times.csv') as csv_file:
         hours_in_minutes = hours * 60
         days_fraction = (hours_in_minutes + minutes) / MINS_DAY
         total_days = days + days_fraction
-        total_days_formatted = '{0:.2f}'.format(total_days)
-        RESOLUTION_TIMES[row.company] = total_days_formatted
+        total_days_formatted = functions.format_days(total_days,
+                                                     'total_days_formatted')
+        RESOLUTION_TIMES[row.company] = float(total_days_formatted)
 
 print(functions.RTN())
 
 print('client, average resolution time in days ytd')
 for client, average_resolution_time_ytd in RESOLUTION_TIMES.items():
-    print(f'{client} {average_resolution_time_ytd}')
+    if average_resolution_time_ytd > 3:
+        above_goal = average_resolution_time_ytd - 3
+        above_goal_formatted = functions.format_days(above_goal,
+                                                     'above_goal_formatted')
+        print(f'{client} {average_resolution_time_ytd} - '
+              f'{above_goal_formatted} days above goal')
+    elif average_resolution_time_ytd == 3:
+        print(f'{client} {average_resolution_time_ytd} - at goal')
+    else:
+        print(f'{client} {average_resolution_time_ytd} - under goal')
+
 
 print(functions.RTN())
 
