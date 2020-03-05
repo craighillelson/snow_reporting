@@ -39,7 +39,6 @@ for client, average_resolution_time_ytd in RESOLUTION_TIMES.items():
     else:
         print(f'{client} {average_resolution_time_ytd} - under goal')
 
-
 print(functions.RTN())
 
 with open('clients_average_resolution_times_in_days.csv', 'w') as out_file:
