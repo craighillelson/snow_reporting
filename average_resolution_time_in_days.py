@@ -6,7 +6,7 @@ from collections import namedtuple
 
 MINS_DAY = 24 * 60
 
-DCT = {}
+RESOLUTION_TIMES = {}
 
 with open('clients_resolution_times.csv') as csv_file:
     F_CSV = csv.reader(csv_file)
@@ -21,12 +21,12 @@ with open('clients_resolution_times.csv') as csv_file:
         days_fraction = (hours_in_minutes + minutes) / MINS_DAY
         total_days = days + days_fraction
         total_days_formatted = '{0:.2f}'.format(total_days)
-        DCT[row.company] = total_days_formatted
+        RESOLUTION_TIMES[row.company] = total_days_formatted
 
 print(functions.RTN())
 
 print('client, average resolution time in days ytd')
-for client, average_resolution_time_ytd in DCT.items():
+for client, average_resolution_time_ytd in RESOLUTION_TIMES.items():
     print(f'{client} {average_resolution_time_ytd}')
 
 print(functions.RTN())
@@ -34,7 +34,7 @@ print(functions.RTN())
 with open('clients_average_resolution_times_in_days.csv', 'w') as out_file:
     out_csv = csv.writer(out_file)
     out_csv.writerow(['client', 'average resolution time in days ytd'])
-    for client, average_resolution_time_ytd in DCT.items():
+    for client, average_resolution_time_ytd in RESOLUTION_TIMES.items():
         keys_values = (client, average_resolution_time_ytd)
         out_csv.writerow(keys_values)
 
