@@ -1,21 +1,81 @@
 """ __doc__ """
 
-def open_csv():
-    """ """
+import functions
+
+def format_percentage(a, b, c, d):
+    """ formats float as a percentage to the second decimal """
+    a = b / c * 100
+    d = '{0:.2f}'.format(a)+'%'
+
+    return d
+
+
+def concat_lists(lst1, lst2, concatenated_list):
+    """ concatenate lists """
+    concatenated_list = lst1 + lst2
+
+    return concatenated_list
+
+
+def filtered_dct(a, b):
+    """ return an enumerated dictionary containing filtered incidents """
+    finalized_dct = {}
+
+    for num, (incident_num, short_description) in \
+              enumerate(a.items(), 1):
+        check = any(item in short_description for item in b)
+        if check is True:
+            pass
+        else:
+            finalized_dct[incident_num] = short_description
+
+    return finalized_dct
+
+
+def open_csv_populate_dct(dct):
+    """
+    return a dictionary that includes only the incidents that do not
+    include strings in short_descriptions_to_skip.csv
+    """
+    import codecs
     import csv
     from collections import namedtuple
 
-    short_descriptions_to_skip = []
+    dct = {}
 
-    with open('short_descriptions_to_skip.csv') as csv_file:
+    with codecs.open('raw_data.csv', 'r', encoding='utf-8', errors='ignore') \
+                     as csv_file:
         F_CSV = csv.reader(csv_file)
         COLUMN_HEADINGS = next(F_CSV)
         CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
         for rows in F_CSV:
             row = CSV_ROW(*rows)
-            short_descriptions_to_skip.append(row.short_descriptions)
+            dct[row.number] = row.short_description
 
-    return short_descriptions_to_skip
+    return dct
+
+
+def open_csv_populate_lst(file, lst):
+    """
+    return a dictionary that includes only the incidents that do not
+    include strings in short_descriptions_to_skip.csv
+    """
+    import codecs
+    import csv
+    from collections import namedtuple
+
+    lst = []
+
+    with codecs.open(file, 'r', encoding='utf-8', errors='ignore') \
+                     as csv_file:
+        F_CSV = csv.reader(csv_file)
+        COLUMN_HEADINGS = next(F_CSV)
+        CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
+        for rows in F_CSV:
+            row = CSV_ROW(*rows)
+            lst.append(row.short_description)
+
+    return lst
 
 
 def prompt_user():
@@ -38,80 +98,60 @@ def prompt_user():
     return short_descriptions_to_add
 
 
-def write_to_csv(a):
+def write_lst_to_csv(a):
     """ write results to a csv """
     import csv
 
     with open('short_descriptions_to_skip.csv', 'w') as out_file:
         out_csv = csv.writer(out_file)
-        out_csv.writerow(['short_descriptions'])
+        out_csv.writerow(['short_description'])
         for i in a:
             out_csv.writerow([i])
 
+    print('"short_descriptions_to_skip.csv" exported successfully')
 
-def concat_lists(a, b, c):
+
+def write_dct_to_csv(a, b, c):
     """ """
-    c = a + b
-    return c
-
-
-def filter_dct():
-    """ """
-    import codecs
     import csv
-    from collections import namedtuple
+    import functions
 
-    dct = {}
+    with open(a, 'w') as out_file:
+        out_csv = csv.writer(out_file)
+        out_csv.writerow(b)
+        for k, v in c.items():
+            keys_values = (k, v)
+            out_csv.writerow(keys_values)
 
-    with codecs.open('raw_data.csv', 'r', encoding='utf-8', errors='ignore') \
-                     as csv_file:
-        F_CSV = csv.reader(csv_file)
-        COLUMN_HEADINGS = next(F_CSV)
-        CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
-        for rows in F_CSV:
-            row = CSV_ROW(*rows)
-            dct[row.number] = row.short_description
-
-    return dct
+    print(functions.RTN())
+    print(f'"{a}" exported successfully')
+    print(functions.RTN())
 
 
-def finalize_dct():
-    """ """
-    finalized_dct = {}
+INCIDENTS = open_csv_populate_dct('incidents')
+for i, (incident_num, short_description) in enumerate(INCIDENTS.items(), 1):
+    print(i, incident_num, short_description)
 
-    for i, (k, v) in enumerate(filtered_dct.items(), 1):
-        check = any(item in v for item in all_short_descriptions_to_skip)
-        if check is True:
-            pass
-        else:
-            finalized_dct[k] = v
+SHORT_DESCRIPTIONS = open_csv_populate_lst('raw_data.csv', 'short_descriptions')
+SHORT_DESCRIPTION_TO_ADD = prompt_user()
+SHORT_DESCRIPTION_TO_SKIP = \
+open_csv_populate_lst('short_descriptions_to_skip.csv',
+                      'short_descriptions_to_skip')
+ALL_SHORT_DESCRIPTIONS_TO_SKIP = concat_lists(SHORT_DESCRIPTION_TO_ADD,
+                                              SHORT_DESCRIPTION_TO_SKIP, all)
 
-    return finalized_dct
+write_lst_to_csv(ALL_SHORT_DESCRIPTIONS_TO_SKIP)
+FILTERED_DCT = filtered_dct(INCIDENTS, ALL_SHORT_DESCRIPTIONS_TO_SKIP)
+for i, (incident_num, short_description) in enumerate(FILTERED_DCT.items(), 1):
+    print(i, incident_num, short_description)
 
+write_dct_to_csv('incidents_created_by_humans.csv',
+                 ['num','short_description'], FILTERED_DCT)
 
-def output_enum_dct():
-    """ """
-    for i, (k, v) in enumerate(finalized_dct.items(), 1):
-        print(i, k, v)
+percentage_created_by_humans_formatted = \
+format_percentage('percentage_created_by_humans', len(FILTERED_DCT),
+                  len(INCIDENTS), 'percentage_created_by_humans_formatted')
 
+print(f'percentage created by humans: {percentage_created_by_humans_formatted}')
 
-short_descriptions_to_skip = open_csv()
-short_descriptions_to_add = prompt_user()
-all_short_descriptions_to_skip = concat_lists(short_descriptions_to_skip,
-                                              short_descriptions_to_add,
-                                              'all_short_descriptions_to_skip')
-
-write_to_csv(all_short_descriptions_to_skip)
-filtered_dct = filter_dct()
-finalized_dct = finalize_dct()
-output_enum_dct()
-
-print('\n')
-total_incs = len(filtered_dct)
-human_created_incs = len(finalized_dct)
-print(f'total incidents: {total_incs}')
-print(f'incidents created by humans: {human_created_incs}')
-perc_human_created = human_created_incs / total_incs * 100
-perc_human_created_fmt = '{0:.2f}'.format(perc_human_created)+'%'
-print(perc_human_created_fmt)
-print('\n')
+print(functions.RTN())
