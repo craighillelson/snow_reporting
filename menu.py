@@ -9,7 +9,7 @@ options = {
     'd': 'empty_account.py',
     'e': 'group_incidents_by_company_count_unique_short_descriptions.py',
     'f': 'search_for_term.py',
-    'g': 'filter_out_incidents_not_created_by_humans.py'
+    'g': 'filter_incidents_not_created_by_humans.py'
 }
 
 def switch_case(a, b):
