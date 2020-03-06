@@ -6,6 +6,13 @@ from collections import namedtuple
 
 RTN = lambda: '\n'
 
+def format_days(a, b):
+    """ format days as floats to the second decimal """
+    b = '{0:.2f}'.format(a)
+
+    return b
+
+
 def format_percentage(a, b):
     per = float(a / b) * 100
     per_fmt = '{0:.2f}'.format(per)+'%'
