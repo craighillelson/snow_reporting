@@ -3,20 +3,20 @@
 import csv
 import functions
 
-def usr_input_date(a, b):
+def usr_input_date(a):
     """ get user input """
     print(a)
-    b = input()
+    a = input()
 
-    return b
+    return a
 
 
-def usr_input_incs(a, b):
+def usr_input_incs(a):
     """ get user input """
     print(a)
-    b = int(input())
+    a = int(input())
 
-    return b
+    return a
 
 
 def fmt_perc(a, b, c):
@@ -47,16 +47,13 @@ def write_to_csv(name_of_file, HEADERS, dct):
 
 
 print(functions.RTN())
-wk_end_date = usr_input_date('enter week ending date (YYYY-MM-DD)',
-                             'wk_end_date')
+wk_end_date = usr_input_date('enter week ending date (YYYY-MM-DD)')
 
 print(functions.RTN())
-tix_last_wk = usr_input_incs('how many incidents were created last week?',
-                             'tix_last_wk')
+tix_last_wk = usr_input_incs('how many incidents were created last week?')
 
 print(functions.RTN())
-tix_this_wk = usr_input_incs('how many incidents were created this week?',
-                             'tix_this_wk')
+tix_this_wk = usr_input_incs('how many incidents were created this week?')
 print(functions.RTN())
 
 diff = tix_this_wk - tix_last_wk
