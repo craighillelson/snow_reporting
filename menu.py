@@ -1,5 +1,7 @@
 """ __doc__ """
 
+from datetime import datetime
+
 RTN = lambda: '\n'
 
 options = {
@@ -9,7 +11,8 @@ options = {
     'd': 'empty_account.py',
     'e': 'group_incidents_by_company_count_unique_short_descriptions.py',
     'f': 'search_for_term.py',
-    'g': 'filter_incidents_not_created_by_humans.py'
+    'g': 'filter_incidents_not_created_by_humans.py',
+    'h': 'summary.py',
 }
 
 def switch_case(a, b):
@@ -30,6 +33,7 @@ print('d - find incidents where company is empty')
 print('e - group incidents by company count unique short descriptions')
 print('f - search for number of occurances of a term')
 print('g - filter out incidents not created by humans')
+print('h - output summary')
 
 while True:
     usr_choice = input()
