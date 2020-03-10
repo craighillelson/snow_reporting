@@ -1,11 +1,12 @@
 import codecs
 import csv
+import functions
 import statistics
 from collections import namedtuple
 from datetime import datetime
 
 def format_date(dates):
-    """ """
+    """ format datetime objects in YYYY-MM-DD H:M:S format """
     return datetime.strptime(dates, '%Y-%m-%d %H:%M:%S')
 
 
@@ -37,10 +38,10 @@ median_resolve_time = statistics.median(resolve_times)
 avg_resolve_time = statistics.mean(resolve_times)
 min = '{:.8f}'.format(min(resolve_times))
 max = '{:.8f}'.format(max(resolve_times))
-print('\n')
+print(functions.RTN())
 print('summary')
-print(f'average resolve time: {avg_resolve_time}')
-print(f'median resolve time: {median_resolve_time}')
+print(f'average resolve time: {avg_resolve_time} days')
+print(f'median resolve time: {median_resolve_time} days')
 print(f'range: {min} - {max}')
 print(f'total number of incidents: {len(resolve_times)}')
 print(f'number of incidents solved under four hours: '
@@ -48,4 +49,4 @@ print(f'number of incidents solved under four hours: '
 perc = float(len(resolve_times_under_four_hours) / len(resolve_times)) * 100
 perc_fmt = str('{0:.2f}'.format(perc)+'%')
 print(f'percent solved quickly: {perc_fmt}')
-print('\n')
+print(functions.RTN())
